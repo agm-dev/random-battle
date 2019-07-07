@@ -3,9 +3,9 @@ const Warrior = require('../src/model/warrior');
 
 const warriorsDataLength = 11;
 const warriorsGen = (result, current, index) => {
-  return [...result, { name: `warrior ${index}` }];
+  return [...result, { name: `warrior ${index + 1}` }];
 }
-const warriorsData = [...Array(warriorsDataLength)].reduce(warriorsGen, []);
+const warriorsData = [...Array(warriorsDataLength - 1)].reduce(warriorsGen, []);
 
 const warriors = warriorsData.map((data) => new Warrior(data));
 
@@ -51,10 +51,27 @@ describe('Battleground', () => {
     expect(battleground).toHaveProperty('round');
     expect(typeof battleground.round).toBe('function');
   });
+
+  test('instance has getAlive method', () => {
+    expect(battleground).toHaveProperty('getAlive');
+    expect(typeof battleground.getAlive).toBe('function');
+  });
+
+  test('getAlive returns the alive warriors', () => {
+    const alive = battleground.getAlive();
+    alive.forEach((warrior) => {
+      expect(warrior.alive).toBeTruthy();
+    });
+    const aliveWarriors = battleground.warriors.filter((warrior) => {
+      return warrior.alive === true;
+    });
+    expect(alive.length).toBe(aliveWarriors.length);
+  });
 });
 
 describe('round method', () => {
-  const initialWarriors = [...battleground.warriors];
+  // to clone the objects inside the array without reference...
+  const initialWarriors = battleground.warriors.map((item) => ({...item}));
   const [winner, loser] = battleground.round();
 
   test('returns an array with [winner, loser]', () => {
@@ -73,5 +90,32 @@ describe('round method', () => {
         expect(warrior.alive).toBeTruthy();
       }
     });
+  });
+
+  test('if only one warrior alive, loser is null', () => {
+    const onlyOne = new Warrior({ name: 'the only one' });
+    const instanceData = {
+      title: 'another battleground',
+      warriors: [onlyOne],
+    };
+    const otherBattle = new Battleground(instanceData);
+    const [winner, loser] = otherBattle.round();
+    expect(loser).toBeNull();
+    expect(winner.name).toBe(onlyOne.name);
+  });
+
+  test('alive warriors decreases by 1 each round', () => {
+    const getAlive = (warrior) => warrior.alive === true;
+    const initialAlive = initialWarriors.filter(getAlive);
+    const current = battleground.getAlive();
+    expect(current.length + 1).toBe(initialAlive.length);
+
+    while (battleground.warriors.filter(getAlive).length > 1) {
+      const source = battleground.warriors.map((item) => ({...item}));
+      const initial = source.filter(getAlive);
+      battleground.round();
+      const alive = battleground.getAlive();
+      expect(alive.length + 1).toBe(initial.length);
+    }
   });
 });

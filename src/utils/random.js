@@ -12,8 +12,8 @@ const getRandomItem = (container = [], { index }) => {
 };
 
 const getTwoRandomItems = (container = []) => {
-  if (container.length <= 2) {
-    return null;
+  if (container.length < 2) {
+    return [container[0], null];
   }
 
   const [first, firstIndex] = getRandomItem(container, { index: true });
