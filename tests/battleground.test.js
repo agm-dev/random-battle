@@ -1,11 +1,11 @@
 const Battleground = require('../src/model/battleground');
 const Warrior = require('../src/model/warrior');
 
-const warriorsData = [
-  { name: 'warrior 1' },
-  { name: 'warrior 2' },
-  { name: 'warrior 3' },
-];
+const warriorsDataLength = 11;
+const warriorsGen = (result, current, index) => {
+  return [...result, { name: `warrior ${index}` }];
+}
+const warriorsData = [...Array(warriorsDataLength)].reduce(warriorsGen, []);
 
 const warriors = warriorsData.map((data) => new Warrior(data));
 
