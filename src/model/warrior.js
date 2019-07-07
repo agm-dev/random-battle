@@ -7,14 +7,14 @@ const STRENGTH_INITIAL_MIN_VALUE = 1;
 class Warrior {
   constructor({ name }) {
     this.name = name;
-    this.strength = this.initStrength();
+    this.initStrength();
     this.alive = true;
   }
 
   initStrength() {
     const max = STRENGTH_INITIAL_MAX_VALUE;
     const min = STRENGTH_INITIAL_MIN_VALUE;
-    return getRandomNumber(min, max);
+    this.strength = getRandomNumber(min, max);
   }
 
   fight(warrior = null) {

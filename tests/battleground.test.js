@@ -2,12 +2,10 @@ const Battleground = require('../src/model/battleground');
 const Warrior = require('../src/model/warrior');
 
 const warriorsDataLength = 11;
-const warriorsGen = (result, current, index) => {
-  return [...result, { name: `warrior ${index + 1}` }];
-}
+const warriorsGen = (result, current, index) => [...result, { name: `warrior ${index + 1}` }];
 const warriorsData = [...Array(warriorsDataLength - 1)].reduce(warriorsGen, []);
 
-const warriors = warriorsData.map((data) => new Warrior(data));
+const warriors = warriorsData.map(data => new Warrior(data));
 
 const data = {
   title: 'test battle',
@@ -62,16 +60,14 @@ describe('Battleground', () => {
     alive.forEach((warrior) => {
       expect(warrior.alive).toBeTruthy();
     });
-    const aliveWarriors = battleground.warriors.filter((warrior) => {
-      return warrior.alive === true;
-    });
+    const aliveWarriors = battleground.warriors.filter(warrior => warrior.alive === true);
     expect(alive.length).toBe(aliveWarriors.length);
   });
 });
 
 describe('round method', () => {
   // to clone the objects inside the array without reference...
-  const initialWarriors = battleground.warriors.map((item) => ({...item}));
+  const initialWarriors = battleground.warriors.map(item => ({ ...item }));
   const [winner, loser] = battleground.round();
 
   test('returns an array with [winner, loser]', () => {
@@ -99,19 +95,19 @@ describe('round method', () => {
       warriors: [onlyOne],
     };
     const otherBattle = new Battleground(instanceData);
-    const [winner, loser] = otherBattle.round();
-    expect(loser).toBeNull();
-    expect(winner.name).toBe(onlyOne.name);
+    const [onlyWinner, nullLoser] = otherBattle.round();
+    expect(nullLoser).toBeNull();
+    expect(onlyWinner.name).toBe(onlyOne.name);
   });
 
   test('alive warriors decreases by 1 each round', () => {
-    const getAlive = (warrior) => warrior.alive === true;
+    const getAlive = warrior => warrior.alive === true;
     const initialAlive = initialWarriors.filter(getAlive);
     const current = battleground.getAlive();
     expect(current.length + 1).toBe(initialAlive.length);
 
     while (battleground.warriors.filter(getAlive).length > 1) {
-      const source = battleground.warriors.map((item) => ({...item}));
+      const source = battleground.warriors.map(item => ({ ...item }));
       const initial = source.filter(getAlive);
       battleground.round();
       const alive = battleground.getAlive();
