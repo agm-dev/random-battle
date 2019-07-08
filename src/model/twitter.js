@@ -1,11 +1,18 @@
+const Console = require('./console');
+const { tweet } = require('../service/twitter.service');
+
 class Twitter {
-  constructor({ client, secret }) {
-    this.client = client;
-    this.secret = secret;
+  constructor() {
+    this.logger = new Console({ prefix: '[twitterLogger]' });
   }
 
-  log(text = '', data = null) {
-    // TODO: use twitter client to send a tweet
+  async log(text = '', data = null) {
+    try {
+      const resultData = await tweet(text);
+      this.logger.log('success on sending tweet', resultData);
+    } catch (err) {
+      this.logger.log('error on sending tweet', err);
+    }
   }
 }
 

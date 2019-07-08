@@ -9,12 +9,10 @@ class Logger {
   init({
     type,
     prefix,
-    client,
-    secret,
   }) {
     switch (type) {
       case 'twitter':
-        this.client = new Twitter({ client, secret });
+        this.client = new Twitter();
         break;
       default:
         this.client = new Console({ prefix });

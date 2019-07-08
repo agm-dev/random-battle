@@ -52,9 +52,4 @@ describe('Twitter logger', () => {
     expect(twitterLogger.client).toHaveProperty(logPropertyName);
     expect(typeof twitterLogger.client[logPropertyName]).toBe('function');
   });
-
-  test('has prefix property', () => {
-    expect(twitterLogger.client).toHaveProperty('client');
-    expect(twitterLogger.client).toHaveProperty('secret');
-  });
 });

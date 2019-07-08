@@ -10,6 +10,7 @@ const game = new Game({
   title,
   warriors,
   interval,
+  // logger: { type: 'twitter' }, // successful twitter testing
 });
 
 game.start();
