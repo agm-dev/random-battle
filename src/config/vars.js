@@ -15,5 +15,6 @@ module.exports = {
   },
   game: {
     interval: process.env.ROUND_INTERVAL_MINUTES,
+    playersJSON: process.env.PLAYERS_JSON_PATH,
   },
 };

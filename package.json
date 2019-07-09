@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "dotenv-safe": "^6.1.0",
+    "text2png": "^2.1.0",
     "twit": "^2.2.11"
   }
 }
