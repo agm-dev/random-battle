@@ -1,7 +1,7 @@
 [
-  ["warrior 1", "@warrior_1"],
+  ["warrior 1", "@@warrior_1"],
   ["warrior 2", "@warrior_2"],
-  ["warrior 3", "@warrior_3"],
+  ["warrior 3", "@@@warrior_3"],
   ["warrior 4", "@warrior_4"],
   ["warrior 5", "@warrior_5"],
   ["warrior 6", "@warrior_6"],

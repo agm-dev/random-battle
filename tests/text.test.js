@@ -2,6 +2,7 @@ const {
   generateSpaces,
   strikeText,
   paddText,
+  getWarriorDisplayText,
 } = require('../src/utils/text');
 
 describe('Text utils', () => {
@@ -18,6 +19,11 @@ describe('Text utils', () => {
   test('paddText is a function', () => {
     expect(paddText).toBeDefined();
     expect(typeof paddText).toBe('function');
+  });
+
+  test('getWarriorDisplayText is a function', () => {
+    expect(getWarriorDisplayText).toBeDefined();
+    expect(typeof getWarriorDisplayText).toBe('function');
   });
 
   test('generateSpaces returns string of N spaces', () => {

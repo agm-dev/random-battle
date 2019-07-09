@@ -12,6 +12,14 @@ class Console {
       console.log(message);
     }
   }
+
+  printReport(text = '', media = '') {
+    const prefix = `${this.prefix}\n\n`;
+    console.log(`${prefix}${text}`);
+    if (media.length) {
+      console.log(`${prefix}${media}`);
+    }
+  }
 }
 
 module.exports = Console;

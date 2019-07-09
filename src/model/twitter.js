@@ -14,6 +14,11 @@ class Twitter {
       this.logger.log('error on sending tweet', err);
     }
   }
+
+  async printReport(text = '', media = '') {
+    // TODO: upload media, then tweet text with attached media
+    this.logger.printReport(text, media);
+  }
 }
 
 module.exports = Twitter;

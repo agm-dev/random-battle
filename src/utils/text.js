@@ -12,8 +12,17 @@ const paddText = (text = '', max = 10, { strike }) => {
   return `${strike ? strikeText(text) : text}${generateSpaces(max - text.length)}`;
 };
 
+const getWarriorDisplayText = ({ name = '', twitter = '' }) => {
+  if (!name.length) {
+    return '';
+  }
+  const formattedName = name.split('')[0].toUpperCase() + name.substr(1);
+  return twitter.length ? `${formattedName} (${twitter})` : `${formattedName}`;
+};
+
 module.exports = {
   generateSpaces,
   strikeText,
   paddText,
+  getWarriorDisplayText,
 };

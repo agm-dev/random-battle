@@ -9,7 +9,7 @@ class Warrior {
     this.name = name;
     this.initStrength();
     this.alive = true;
-    this.twitter = twitter;
+    this.twitter = twitter.length ? `@${twitter.replace(/@/g, '')}` : '';
   }
 
   initStrength() {

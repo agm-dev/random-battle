@@ -27,19 +27,17 @@ class Game {
 
   tick() {
     const [winner, loser] = this.battleground.round();
-    this.logger.log(`${winner.name} (strength: ${winner.strength}) has defeated ${loser.name} (strength: ${loser.strength})`);
+    this.logger.printReport({ warriors: this.battleground.warriors, winner, loser });
 
     const alive = this.battleground.getAlive();
     if (alive.length === 1) {
-      this.endGame(alive[0]);
+      this.endGame();
     }
   }
 
-  endGame(winner) {
+  endGame() {
     clearInterval(this.timer);
     this.timer = null;
-    this.logger.log('the game has ended');
-    this.logger.log('the winner is: ', winner);
   }
 }
 

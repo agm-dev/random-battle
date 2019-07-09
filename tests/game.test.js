@@ -1,11 +1,15 @@
+const { join } = require('path');
 const Game = require('../src/model/game');
 const Battleground = require('../src/model/battleground');
 const Logger = require('../src/model/logger');
 
 const title = 'Test title';
-const namesConfig = 'warrior 1,warrior 2,warrior 3,warrior 4,warrior 5';
-const names = namesConfig.split(',');
-const warriors = names.map(name => ({ name }));
+// eslint-disable-next-line import/no-dynamic-require
+const jsonData = require(join(__dirname, '..', 'players.example.json'));
+const warriors = jsonData.map((row) => {
+  const [name, twitter] = row;
+  return { name, twitter };
+});
 const interval = 0.5 * 1000; // 0.5 seconds in milliseconds
 
 describe('Game', () => {
@@ -53,15 +57,5 @@ describe('Game', () => {
   test('has start method', () => {
     expect(game).toHaveProperty('start');
     expect(typeof game.start).toBe('function');
-  });
-
-  test('the game ends after N-warriors - 1 rounds', (done) => {
-    const totalRounds = game.battleground.warriors.length - 1;
-    const aproxEndTime = totalRounds * interval + 200;
-    game.start();
-    setTimeout(() => {
-      expect(game.timer).toBeNull();
-      done();
-    }, aproxEndTime);
   });
 });
