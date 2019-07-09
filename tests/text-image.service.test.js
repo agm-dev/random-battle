@@ -1,9 +1,10 @@
 const { join } = require('path');
 const { createImage, formatImageContent } = require('../src/service/text-image.service');
 const Warrior = require('../src/model/warrior');
+const { readJSON } = require('../src/utils/json');
 
-// eslint-disable-next-line import/no-dynamic-require
-const jsonData = require(join(__dirname, '..', 'players.example.json'));
+
+const jsonData = readJSON(join(__dirname, '..', 'players.example.json'));
 const warriors = jsonData.map((row, index) => {
   const [name, twitter] = row;
   const warrior = new Warrior({ name, twitter });

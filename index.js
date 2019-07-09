@@ -1,10 +1,15 @@
 const Game = require('./src/model/game');
+const { game: { playersJSON } } = require('./src/config/vars');
+const { readJSON } = require('./src/utils/json');
 
 const title = 'Test title';
-const namesConfig = 'warrior 1,warrior 2,warrior 3,warrior 4,warrior 5';
-const names = namesConfig.split(',');
-const warriors = names.map(name => ({ name }));
 const interval = 1 * 1000; // 5 seconds in milliseconds
+
+const jsonData = readJSON(playersJSON);
+const warriors = jsonData.map((row) => {
+  const [name, twitter] = row;
+  return { name, twitter };
+});
 
 const game = new Game({
   title,

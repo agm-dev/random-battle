@@ -2,10 +2,12 @@ const { join } = require('path');
 const Game = require('../src/model/game');
 const Battleground = require('../src/model/battleground');
 const Logger = require('../src/model/logger');
+const { readJSON } = require('../src/utils/json');
+
 
 const title = 'Test title';
 // eslint-disable-next-line import/no-dynamic-require
-const jsonData = require(join(__dirname, '..', 'players.example.json'));
+const jsonData = readJSON(join(__dirname, '..', 'players.example.json'));
 const warriors = jsonData.map((row) => {
   const [name, twitter] = row;
   return { name, twitter };
