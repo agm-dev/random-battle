@@ -4,11 +4,6 @@ const { paddText } = require('../utils/text');
 
 const DEFAULT_OPTIONS = {
   backgroundColor: 'white',
-  lineSpacing: 1,
-  paddingLeft: 1,
-  paddingTop: 1,
-  paddingRight: 1,
-  paddingBottom: 1,
   output: 'dataURL',
 };
 

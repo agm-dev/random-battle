@@ -5,7 +5,7 @@ const strikeText = (text = '') => text.split('').reduce((final, current) => `${f
 const paddText = (text = '', max = 10, { strike }) => {
   const maxAllowed = max - 2;
   if (text.length > maxAllowed) {
-    const subText = text.substr(0, maxAllowed);
+    const subText = `${text.substr(0, maxAllowed - 3)}...`;
     const formatted = strike ? strikeText(subText) : subText;
     return `${formatted}${generateSpaces(max - maxAllowed)}`;
   }
