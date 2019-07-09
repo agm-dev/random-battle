@@ -5,10 +5,11 @@ const STRENGTH_INITIAL_MAX_VALUE = 100;
 const STRENGTH_INITIAL_MIN_VALUE = 1;
 
 class Warrior {
-  constructor({ name }) {
+  constructor({ name, twitter = '' }) {
     this.name = name;
     this.initStrength();
     this.alive = true;
+    this.twitter = twitter;
   }
 
   initStrength() {

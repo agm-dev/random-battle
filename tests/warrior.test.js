@@ -35,6 +35,12 @@ describe('Warrior', () => {
     expect(warrior.alive).toBeTruthy();
   });
 
+  test('instance has a twitter property', () => {
+    expect(warrior).toHaveProperty('twitter');
+    expect(warrior.twitter).toBeDefined();
+    expect(typeof warrior.twitter).toBe('string');
+  });
+
   test('instance has fight method', () => {
     expect(warrior).toHaveProperty('fight');
     expect(typeof warrior.fight).toBe('function');
