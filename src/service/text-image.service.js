@@ -26,7 +26,7 @@ const formatImageContent = (warriors = []) => {
   const MAX_NAME_LENGTH = 30;
 
   return warriors.reduce((final, current, index) => {
-    const field = paddText(current.name, MAX_NAME_LENGTH, { strike: current.alive });
+    const field = paddText(current.name, MAX_NAME_LENGTH, { strike: !current.alive });
     return index > 0 && index % COLUMNS === 0 ? `${final}\n${field}` : `${final}${field}`;
   }, '');
 };

@@ -2,6 +2,7 @@ const Console = require('./console');
 const Twitter = require('./twitter');
 const { getWarriorDisplayText } = require('../utils/text');
 const { twitter: { hashtag }} = require('../config/vars');
+const { createImage, formatImageContent } = require('../service/text-image.service');
 
 class Logger {
   constructor(config) {
@@ -37,11 +38,13 @@ class Logger {
     const winnerName = getWarriorDisplayText(winner);
     const loserName = getWarriorDisplayText(loser);
     const remaining = alive.length === 1 ? `${winnerName} has won the battle` : `${alive.length} remaining`;
-    // TODO: image
+
+    const imageContent = formatImageContent(warriors);
+    const imageData = createImage(imageContent);
 
     const text = `Round ${round}.\n${winnerName} has defeated ${loserName}.\n\n${remaining}. #${hashtag}`;
 
-    this.client.printReport(text);
+    this.client.printReport(text, imageData);
   }
 
 }
