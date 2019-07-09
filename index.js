@@ -7,5 +7,5 @@ const game = new Game({
   title: 'random battle',
   warriors: loadPlayersData(),
   interval, // minutes!
-  // logger: { type: 'twitter' }, // successful twitter testing
+  logger: { type: 'twitter' },
 }).start();

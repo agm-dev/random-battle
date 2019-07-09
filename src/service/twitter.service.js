@@ -35,9 +35,11 @@ const uploadMedia = (base64image = '') => {
       reject(new Error('provide a base64 image string'));
     }
 
+    const mediaData = base64image.slice(base64image.indexOf(','));
+
     T.post(
       'media/upload',
-      { media_data: base64image },
+      { media_data: mediaData },
       (err, data) => {
         if (err) {
           reject(err);
@@ -54,7 +56,7 @@ const tweetWithMedia = async (text = '', base64image = '') => {
     const mediaId = await uploadMedia(base64image);
     return await tweet(text, { media_ids: [mediaId] });
   } catch (err) {
-    return null;
+    return err;
   }
 };
 
