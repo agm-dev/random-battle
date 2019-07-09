@@ -5,6 +5,7 @@ class Battleground {
   constructor({ title, warriors }) {
     this.title = title;
     this.initWarriors(warriors);
+    this.rounds = 0;
   }
 
   initWarriors(data = []) {
@@ -21,6 +22,7 @@ class Battleground {
   }
 
   round() {
+    this.rounds = this.rounds + 1;
     const alive = this.warriors.filter(warrior => warrior.alive === true);
     if (alive.length === 1) {
       return [alive[0], null];

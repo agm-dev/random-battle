@@ -27,7 +27,12 @@ class Game {
 
   tick() {
     const [winner, loser] = this.battleground.round();
-    this.logger.printReport({ warriors: this.battleground.warriors, winner, loser });
+    this.logger.printReport({
+      round: this.battleground.rounds,
+      warriors: this.battleground.warriors,
+      winner,
+      loser,
+    });
 
     const alive = this.battleground.getAlive();
     if (alive.length === 1) {

@@ -26,6 +26,13 @@ describe('Battleground', () => {
     expect(battleground.title.length).toBeGreaterThan(0);
   });
 
+  test('instance has rounds property', () => {
+    expect(battleground).toHaveProperty('rounds');
+    expect(battleground.rounds).toBeDefined();
+    expect(typeof battleground.rounds).toBe('number');
+    expect(battleground.title.length).toBeGreaterThanOrEqual(0);
+  });
+
   test('instance title is the same that was provided in the constructor', () => {
     expect(battleground.title).toBe(data.title);
   });
@@ -68,7 +75,13 @@ describe('Battleground', () => {
 describe('round method', () => {
   // to clone the objects inside the array without reference...
   const initialWarriors = battleground.warriors.map(item => ({ ...item }));
+  const roundsBeforeRound = battleground.rounds;
   const [winner, loser] = battleground.round();
+  const roundsAfterRound = battleground.rounds;
+
+  test('increases rounds value by 1', () => {
+    expect(roundsAfterRound).toBe(roundsBeforeRound + 1);
+  });
 
   test('returns an array with [winner, loser]', () => {
     expect(winner).toBeInstanceOf(Warrior);
