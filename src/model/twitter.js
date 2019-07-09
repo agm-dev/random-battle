@@ -1,12 +1,12 @@
 const Console = require('./console');
-const { tweet } = require('../service/twitter.service');
+const { tweet, tweetWithMedia } = require('../service/twitter.service');
 
 class Twitter {
   constructor() {
     this.logger = new Console({ prefix: '[twitterLogger]' });
   }
 
-  async log(text = '', data = null) {
+  async log(text = '') {
     try {
       const resultData = await tweet(text);
       this.logger.log('success on sending tweet', resultData);
@@ -16,8 +16,9 @@ class Twitter {
   }
 
   async printReport(text = '', media = '') {
-    // TODO: upload media, then tweet text with attached media
+    const result = await tweetWithMedia(text, media);
     this.logger.printReport(text, media);
+    this.logger.log('Twitter response: ', result);
   }
 }
 
