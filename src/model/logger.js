@@ -30,23 +30,25 @@ class Logger {
     const {
       round = 1,
       warriors,
-      winner,
-      loser,
+      winner = null,
+      loser = null,
+      title = '',
     } = data;
 
     const alive = warriors.filter(warrior => warrior.alive);
-    const winnerName = getWarriorDisplayText(winner);
-    const loserName = getWarriorDisplayText(loser);
+    const winnerName = winner ? getWarriorDisplayText(winner) : '';
+    const loserName = loser ? getWarriorDisplayText(loser) : '';
     const remaining = alive.length === 1 ? `${winnerName} has won the battle` : `${alive.length} remaining`;
 
     const imageContent = formatImageContent(warriors);
     const imageData = createImage(imageContent);
 
-    const text = `Round ${round}.\n${winnerName} has defeated ${loserName}.\n\n${remaining}. #${hashtag}`;
+    const text = round === 0 && title.length
+      ? `The ${title} game has started.\n\n${remaining}. #${hashtag}`
+      : `Round ${round}.\n${winnerName} has defeated ${loserName}.\n\n${remaining}. #${hashtag}`;
 
     this.client.printReport(text, imageData);
   }
-
 }
 
 module.exports = Logger;

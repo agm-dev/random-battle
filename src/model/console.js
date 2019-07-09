@@ -4,10 +4,10 @@ class Console {
     this.prefix = prefix;
   }
 
-  log(text = '', data = null) {
+  log(text = '', media = '') {
     const message = `${this.prefix} ${text}`;
-    if (data !== null) {
-      console.log(message, data);
+    if (media !== null) {
+      console.log(message, media);
     } else {
       console.log(message);
     }

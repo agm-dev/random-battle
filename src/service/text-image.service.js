@@ -32,11 +32,12 @@ const formatImageContent = (warriors = [], { format = 'list' } = {}) => {
     .filter(warrior => warrior.alive)
     .reduce((final, warrior) => `${final}\n${warrior.name}`, 'Alive: \n');
 
+  const defeatedInitialText = 'Defeated: \n';
   const defeated = warriors
     .filter(warrior => !warrior.alive)
-    .reduce((final, warrior) => `${final}\n${strikeText(warrior.name)}`, 'Defeated: \n');
+    .reduce((final, warrior) => `${final}\n${strikeText(warrior.name)}`, defeatedInitialText);
 
-  return `${alive}\n\n${defeated}`;
+  return defeated === defeatedInitialText ? alive : `${alive}\n\n${defeated}`;
 };
 
 module.exports = {

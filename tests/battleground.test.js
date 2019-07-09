@@ -8,7 +8,6 @@ const warriorsData = [...Array(warriorsDataLength - 1)].reduce(warriorsGen, []);
 const warriors = warriorsData.map(data => new Warrior(data));
 
 const data = {
-  title: 'test battle',
   warriors,
 };
 
@@ -19,22 +18,11 @@ describe('Battleground', () => {
     expect(battleground).toBeInstanceOf(Battleground);
   });
 
-  test('instance has title property', () => {
-    expect(battleground).toHaveProperty('title');
-    expect(battleground.title).toBeDefined();
-    expect(typeof battleground.title).toBe('string');
-    expect(battleground.title.length).toBeGreaterThan(0);
-  });
-
   test('instance has rounds property', () => {
     expect(battleground).toHaveProperty('rounds');
     expect(battleground.rounds).toBeDefined();
     expect(typeof battleground.rounds).toBe('number');
-    expect(battleground.title.length).toBeGreaterThanOrEqual(0);
-  });
-
-  test('instance title is the same that was provided in the constructor', () => {
-    expect(battleground.title).toBe(data.title);
+    expect(battleground.rounds).toBeGreaterThanOrEqual(0);
   });
 
   test('instance has warriors property', () => {
@@ -104,7 +92,6 @@ describe('round method', () => {
   test('if only one warrior alive, loser is null', () => {
     const onlyOne = new Warrior({ name: 'the only one' });
     const instanceData = {
-      title: 'another battleground',
       warriors: [onlyOne],
     };
     const otherBattle = new Battleground(instanceData);

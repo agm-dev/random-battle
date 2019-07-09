@@ -2,8 +2,7 @@ const Warrior = require('./warrior');
 const { getTwoRandomItems } = require('../utils/random');
 
 class Battleground {
-  constructor({ title, warriors }) {
-    this.title = title;
+  constructor({ warriors }) {
     this.initWarriors(warriors);
     this.rounds = 0;
   }

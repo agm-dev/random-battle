@@ -6,7 +6,7 @@ const DEFAULT_LOGGER_CONFIG = {
   prefix: '[random-battle]',
 };
 
-const DEFAULT_INTERVAL = 15 * 60 * 1000; // 15 min in milliseconds
+const DEFAULT_INTERVAL = 15;
 
 class Game {
   constructor({
@@ -15,14 +15,21 @@ class Game {
     logger = DEFAULT_LOGGER_CONFIG,
     interval = DEFAULT_INTERVAL,
   }) {
+    this.title = title;
     this.battleground = new Battleground({ title, warriors });
     this.logger = new Logger(logger);
     this.timer = null;
-    this.interval = interval;
+    this.interval = interval * 60 * 1000; // from minutes to milliseconds
   }
 
   start() {
     this.timer = setInterval(this.tick.bind(this), this.interval);
+    this.logger.printReport({
+      round: this.battleground.rounds,
+      warriors: this.battleground.warriors,
+      title: this.title,
+    });
+    return this;
   }
 
   tick() {

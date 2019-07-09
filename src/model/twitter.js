@@ -6,9 +6,9 @@ class Twitter {
     this.logger = new Console({ prefix: '[twitterLogger]' });
   }
 
-  async log(text = '') {
+  async log(text = '', media = '') {
     try {
-      const resultData = await tweet(text);
+      const resultData = media.length ? await tweetWithMedia(text, media) : await tweet(text);
       this.logger.log('success on sending tweet', resultData);
     } catch (err) {
       this.logger.log('error on sending tweet', err);

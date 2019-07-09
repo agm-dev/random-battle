@@ -35,6 +35,17 @@ describe('Game', () => {
     expect(game.logger).toBeInstanceOf(Logger);
   });
 
+  test('instance has title property', () => {
+    expect(game).toHaveProperty('title');
+    expect(game.title).toBeDefined();
+    expect(typeof game.title).toBe('string');
+    expect(game.title.length).toBeGreaterThan(0);
+  });
+
+  test('instance title is the same that was provided in the constructor', () => {
+    expect(game.title).toBe(title);
+  });
+
   test('has a timer property', () => {
     expect(game).toHaveProperty('timer');
   });
